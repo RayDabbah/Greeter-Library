@@ -11,7 +11,7 @@
         yi: 'ואס מאכט א איד?!'
     }
 
-    var title  = {
+    var title = {
         en: 'Mr.',
         he: 'רבי',
         yi: 'רב'
@@ -25,11 +25,29 @@
 
     Greetr.prototype = {
         welcomeMessage: function () {
-            return `${greetings[this.language]},${title[this.language]} ${this.firstname} ${this.lastname}`;
+            return `${greetings[this.language]},${title[this.language]} ${this.fullName()}`;
         },
         logInMessage: function () {
-            return `${logMessages[this.language]},${title[this.language]} ${this.firstname} ${this.lastname}`;
+            return `${logMessages[this.language]},${title[this.language]} ${this.fullName()}`;
         },
+        fullName: function () {
+            return `${this.firstname} ${this.lastname}`;
+        },
+        validate: function () {
+            if (supportedLangs.indexOf(this.language) === -1) {
+                throw "Unsupported language";
+            }
+            return this;
+        },
+        greetWelcome: function(messageType){
+            this.validate()
+            if(messageType){
+            console.log(this.welcomeMessage())
+            }else{
+                console.log(this.logInMessage())
+            }
+            return this;
+        }
     }
 
     Greetr.init = function (firstname, lastname, language) {
