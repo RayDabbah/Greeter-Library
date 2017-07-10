@@ -39,13 +39,16 @@
             }
             return this;
         },
-        greetWelcome: function(messageType){
+        greetWelcome: function (messageType) {
             this.validate()
-            if(messageType){
-            console.log(this.welcomeMessage())
-            }else{
-                console.log(this.logInMessage())
+            if (messageType === 'welcome') {
+                return this.welcomeMessage()
+            } else {
+                return this.logInMessage()
             }
+        },
+        addGreeting: function (attribute, msgType) {
+            $(attribute).html(this.greetWelcome(msgType))
             return this;
         }
     }
